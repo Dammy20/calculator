@@ -1,0 +1,177 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #a{
+            border: 1px solid; box-shadow: 0 0 5px; border-radius: 5px; background-color:#e06f6f ;
+             width:300px ; height: 420px; padding: 20px; margin: auto;
+        }
+        #screen{
+            margin: auto; height: 40px; width: 290px; margin-top: 20px;  border: none; outline: none; 
+        }
+        button{ margin-top: 20px; width: 50px; height: 30px;  box-shadow: 0 0 5px;
+             border-radius: 10px;   background-color: white; border: none; 
+             background-color: #303030; color: white;
+
+        }
+    </style>
+</head>
+<body>
+    <!-- <input type="number" id="firstnumber">
+    <input type="text" id="operator">
+    <input type="number" id="secondnumber">
+    <button onclick="calculate()">Calculate</button> -->
+
+     <div id="a" >
+    <input id="screen" type="text" readonly> <br>
+    <div id="screen1" contenteditable="true"></div>
+    <div id="screen2" contenteditable="true"></div>
+    <div class="but">
+        <button onclick="theOn()">on</button>
+        <button onclick="theOff()">off</button>
+
+    </div>
+    <div style="display:flex; gap: 20px;">
+        <div>
+        <button style="background-color: grey;"  onclick="clearlast()">Cc</button>
+        <button  onclick="addnumber(0)">0</button>
+        <button id="b" onclick="addnumber(1)">1</button>
+        <button onclick="Getoperator('+')">+</button> <br>
+        <button onclick="Getoperator('square')">√</button>
+
+        </div>
+        <div>
+    <button style="background-color: grey;" onclick="addnumber(2)">2</button>
+    <button  onclick="addnumber(3)">3</button>
+    <button onclick="addnumber(4)">4</button>
+    <button onclick="Getoperator('*')">*</button> 
+    <button onclick="Getoperator('pow')">**</button> 
+    
+
+        </div>
+        <div>
+    <button style="background-color: grey;" onclick="addnumber(5)">5</button>
+    <button onclick="addnumber(6)">6</button>
+    <button onclick="addnumber(7)">7</button>
+    <button onclick="addnumber('.')">.</button>
+    <button onclick="Getoperator('-')">-</button>
+   
+
+    
+
+        </div>
+        <div>
+            <button style="background-color: #ff4561;"  onclick="addnumber(8)">8</button> 
+            <button style="background-color: #ff4561;" onclick="addnumber(9)">9</button> 
+            <button style="background-color: #ff4561;" onclick="deleteeverything()">Del</button>
+            <button style="background-color: #ff9933;"  onclick="answeris()">=</button> 
+            <button onclick="Getoperator('Percent')">%</button>
+
+        </div>
+    
+    
+    
+   
+    </div>
+    
+</div>
+
+</body>
+</html>
+<script>
+
+
+   
+
+
+    let first_number = 0;
+    let second_number = 0;
+    let operator = "";
+    let on = true;
+    let off = true;
+    let screen = document.getElementById('screen')
+    let screen2 = document.getElementById('screen2')
+
+    screen2.hidden = true;
+    screen.hidden = true;
+    function theOn(){
+        if (on === true) {
+            screen.innerHTML = null;
+            screen2.hidden = false;
+            screen.hidden = false;
+            console.log(on);
+            on = true;
+        } else {
+            screen2.hidden = true;
+            screen.hidden = true;
+            console.log(on);
+            off = true;
+        }
+         
+    }
+    function theOff() {
+        if (off === false) {
+            screen.innerHTML = null;
+            screen2.hidden = false;
+            screen.hidden = false;
+            console.log(off);
+            off = false;
+        } else {
+            screen2.hidden = true;
+            screen.hidden = true;
+            console.log(off);
+            on = true;
+        }
+         
+    }
+
+    function deleteeverything(){
+        document.getElementById('screen').value = ""
+
+    }
+    function addnumber(screenNumber){
+        document.getElementById('screen').value += screenNumber;
+    }
+    function Getoperator(opt){
+        operator = opt;
+        first_number = Number( document.getElementById('screen').value);
+        document.getElementById('screen').value = ""
+    }
+    function answeris(){
+        second_number = Number( document.getElementById('screen').value);
+
+        if(operator =="+"){
+        document.getElementById('screen').value = first_number + second_number;
+    }else if(operator == "-"){
+        document.getElementById('screen').value = first_number - second_number;
+     }else if(operator == "*"){
+        document.getElementById('screen').value = first_number * second_number;
+     }else if(operator == "pow"){
+        document.getElementById('screen').value = Math.pow(first_number, second_number);
+       }else if(operator == "square"){
+        document.getElementById('screen').value = Math.sqrt(first_number);
+
+       }
+       else if(operator == "Percent"){
+        document.getElementById('screen').value = (first_number * second_number/100);
+
+       }
+
+     }
+    
+   
+    function clearlast(){
+    let screenValue = document.getElementById("screen");
+    let lengthOfstring = String(screenValue.value).length;
+    let partofString =String(screenValue.value).slice(0,lengthOfstring - 1);
+    document.getElementById('screen').value = partofString
+    }
+    // function calculate(){
+    //     let x = document.getElementById('screen').value;
+    //     let y = eval (x)
+    //     document.getElementById('screen').value=y
+    // }
+</script>
